@@ -21,10 +21,13 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var currentStatus: UILabel!
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var minTemp: UILabel!
-    @IBOutlet weak var maxTemp: UILabel!
     @IBOutlet weak var pressure: UILabel!
+    @IBOutlet weak var sunrise: UILabel!
+    @IBOutlet weak var sunset: UILabel!
+    @IBOutlet weak var cloud: UILabel!
+    @IBOutlet weak var windspeed: UILabel!
     
+    @IBOutlet weak var infoTable: UITableView!
     
     override func viewDidLoad() {
         super .viewDidLoad()
@@ -75,9 +78,6 @@ class WeatherViewController: UIViewController {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
-    
- 
-    
 }
 
 extension WeatherViewController: CLLocationManagerDelegate {
