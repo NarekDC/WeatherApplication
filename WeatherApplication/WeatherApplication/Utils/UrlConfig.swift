@@ -9,10 +9,11 @@ import Foundation
 
 // http://api.openweathermap.org/data/2.5/weather?lat=51.509980&lon=-0.133700&appid=3687e5261eeb79b6aa8c42a493731e9a
 
-var weatherApiUrl : String {
-    return "http://api.openweathermap.org/data/2.5/weather?"
+enum Key: String {
+    case weatherApiKey = "3687e5261eeb79b6aa8c42a493731e9a"
 }
 
-var weatherApiKey: String {
-    return "3687e5261eeb79b6aa8c42a493731e9a"
+struct API {
+    static let key = Key.weatherApiKey.rawValue
+    static let baseURL = URL(string: "http://api.openweathermap.org/data/2.5/weather")!
 }

@@ -16,7 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        customizeAppearance()
+        window = UIWindow()
+        
+        window?.makeKeyAndVisible()
+        window?.rootViewController = RootViewController()
+        
         return true
     }
 
@@ -27,14 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-    }
-
-    private func customizeAppearance() {
-        window?.tintColor = tintColor
-        UISearchBar.appearance().barTintColor = tintColor
-        UINavigationBar.appearance().barTintColor = tintColor
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue):UIColor.white]
     }
 }
 

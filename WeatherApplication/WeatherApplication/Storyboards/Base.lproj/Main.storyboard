@@ -188,10 +188,6 @@
                                 <exclude reference="3zw-ZI-vfO"/>
                                 <exclude reference="baZ-MG-7WA"/>
                                 <exclude reference="pTc-U0-MQb"/>
-                                <exclude reference="Ibp-bL-561"/>
-                                <exclude reference="Pdn-SG-weu"/>
-                                <exclude reference="Wd0-CA-A9k"/>
-                                <exclude reference="vHf-sm-nt1"/>
                                 <exclude reference="I2K-pL-g6l"/>
                                 <exclude reference="INQ-hb-Bs9"/>
                                 <exclude reference="K1v-a6-1HB"/>
@@ -201,6 +197,10 @@
                                 <exclude reference="rVT-RM-c7j"/>
                                 <exclude reference="yBs-0L-V09"/>
                                 <exclude reference="yjb-cD-nZo"/>
+                                <exclude reference="Ibp-bL-561"/>
+                                <exclude reference="Pdn-SG-weu"/>
+                                <exclude reference="Wd0-CA-A9k"/>
+                                <exclude reference="vHf-sm-nt1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -214,11 +214,6 @@
                                 <exclude reference="I4W-Nl-myO"/>
                                 <include reference="baZ-MG-7WA"/>
                                 <include reference="pTc-U0-MQb"/>
-                                <exclude reference="Ibp-bL-561"/>
-                                <exclude reference="Pdn-SG-weu"/>
-                                <exclude reference="Wd0-CA-A9k"/>
-                                <exclude reference="fsG-8O-lrY"/>
-                                <include reference="vHf-sm-nt1"/>
                                 <exclude reference="98v-al-5h2"/>
                                 <include reference="I2K-pL-g6l"/>
                                 <exclude reference="INQ-hb-Bs9"/>
@@ -230,6 +225,11 @@
                                 <include reference="rVT-RM-c7j"/>
                                 <include reference="yBs-0L-V09"/>
                                 <exclude reference="yjb-cD-nZo"/>
+                                <exclude reference="Ibp-bL-561"/>
+                                <exclude reference="Pdn-SG-weu"/>
+                                <exclude reference="Wd0-CA-A9k"/>
+                                <exclude reference="fsG-8O-lrY"/>
+                                <include reference="vHf-sm-nt1"/>
                             </mask>
                         </variation>
                     </view>
