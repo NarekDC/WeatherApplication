@@ -1,5 +1,5 @@
 //
-//  WeatherViewController.swift
+//  RootViewController.swift
 //  WeatherApplication
 //
 //  Created by Narek Ektubaryan on 12/25/20.
@@ -87,16 +87,32 @@ class RootViewController: UIViewController {
     
     private func requestLocation() {
         locationManager.delegate = self
-        
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
     }
+
 }
 
 extension RootViewController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+
+        switch manager.authorizationStatus {
+            case .authorizedAlways , .authorizedWhenInUse:
+                break
+            case .notDetermined , .denied , .restricted:
+                break
+            default:
+                break
+        }
+        
+        switch manager.accuracyAuthorization {
+            case .fullAccuracy:
+                break
+            case .reducedAccuracy:
+                break
+            default:
+                break
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             currentLocation = location

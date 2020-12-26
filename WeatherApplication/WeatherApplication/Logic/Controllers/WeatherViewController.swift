@@ -40,7 +40,6 @@ class WeatherViewController: UIViewController {
         temperature.text = vm.temperature
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         

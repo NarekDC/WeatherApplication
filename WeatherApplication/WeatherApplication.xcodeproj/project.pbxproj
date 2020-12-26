@@ -116,9 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				87CA3EE22596B3080092A616 /* Utils */,
-				87FEBF2F2596B15900060101 /*  Manager */,
+				87FEBF2F2596B15900060101 /* Managers */,
 				87BCAC702596415D0024B133 /* Supporting Files */,
-				87BCAC5D259640870024B133 /* Networking */,
 				87BCAC59259640210024B133 /* Storyboards */,
 				87BCAC582596400F0024B133 /* Logic */,
 				87BCAC2A25961CE40024B133 /* Assets.xcassets */,
@@ -162,13 +161,6 @@
 				87BCAC2C25961CE40024B133 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		87BCAC5D259640870024B133 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		87BCAC702596415D0024B133 /* Supporting Files */ = {
@@ -216,12 +208,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		87FEBF2F2596B15900060101 /*  Manager */ = {
+		87FEBF2F2596B15900060101 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				87FEBF302596B17600060101 /* WeatherDataManager.swift */,
 			);
-			path = " Manager";
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
