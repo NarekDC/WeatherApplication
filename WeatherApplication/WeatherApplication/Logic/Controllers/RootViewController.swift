@@ -39,7 +39,7 @@ class RootViewController: UIViewController {
             if let error = error {
                 dump(error)
             } else if let response = response {
-                self.currentWeatherViewController.viewModel?.weather = response
+//                self.currentWeatherViewController.viewModel?.weather = response
                 // Nofity CurrentWeatherViewController
                 print("response \(response)")
             }
@@ -60,7 +60,7 @@ class RootViewController: UIViewController {
                     name: city,
                     latitude: currentLocation.coordinate.latitude,
                     longitude: currentLocation.coordinate.longitude)
-                self.currentWeatherViewController.viewModel?.location = l
+//                self.currentWeatherViewController.viewModel?.location = l
             }
         })
     }
@@ -70,7 +70,7 @@ class RootViewController: UIViewController {
         
         setupActiveNotification()
         
-        currentWeatherViewController.viewModel = CurrentWeatherViewModel()
+//        currentWeatherViewController.viewModel = CurrentWeatherViewModel()
     }
     
     private func setupActiveNotification() {
