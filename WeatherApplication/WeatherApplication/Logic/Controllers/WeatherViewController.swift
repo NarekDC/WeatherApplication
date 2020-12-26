@@ -7,42 +7,28 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController { 
     
-    @IBOutlet weak var cityName: UILabel!
-    @IBOutlet weak var currentStatus: UILabel!
-    @IBOutlet weak var temperature: UILabel!
-    @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var pressure: UILabel!
-    @IBOutlet weak var sunrise: UILabel!
-    @IBOutlet weak var sunset: UILabel!
-    @IBOutlet weak var cloud: UILabel!
-    @IBOutlet weak var windspeed: UILabel!
-    @IBOutlet weak var infoTable: UITableView!
-
-    var viewModel: CurrentWeatherViewModel? {
-        didSet {
-            DispatchQueue.main.async { self.updateView() }
-        }
-    }
-
-    func updateView() {
-        
-        if let vm = viewModel, vm.isUpdateReady {
-            updateWeatherContainer(with: vm)
-        } else {
-            
-        }
-    }
-
-    func updateWeatherContainer(with vm: CurrentWeatherViewModel) {
-        cityName.text = vm.city
-        temperature.text = vm.temperature
-    }
-
+    @IBOutlet weak var cityNameLabel: UILabel!
+    @IBOutlet weak var currentStatusLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
+    @IBOutlet weak var cloudLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    
+    @IBOutlet weak var infoTableView: UITableView!
+    
+    var viewModel: CurrentWeatherViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cityNameLabel.text = "vm.location.name"
+        temperatureLabel.text = "String(vm.weather.main.temp)"
     }
 
 }

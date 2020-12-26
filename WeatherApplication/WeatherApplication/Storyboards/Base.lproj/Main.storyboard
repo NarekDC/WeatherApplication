@@ -234,16 +234,16 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="cityName" destination="5qO-65-0pJ" id="LXu-H3-L6r"/>
-                        <outlet property="cloud" destination="4Kl-7u-i9e" id="Xft-EU-JoX"/>
-                        <outlet property="currentStatus" destination="0ZK-Iz-Mcf" id="D4W-Nl-5DU"/>
-                        <outlet property="humidity" destination="5ht-c7-hTW" id="HuE-oe-Mq4"/>
-                        <outlet property="infoTable" destination="wd1-Fu-I5U" id="0O6-YH-CIp"/>
-                        <outlet property="pressure" destination="uZb-uQ-Xwf" id="8xJ-3h-NsX"/>
-                        <outlet property="sunrise" destination="ftP-I9-KAS" id="4ZH-Ws-H5A"/>
-                        <outlet property="sunset" destination="D1W-B1-HnT" id="K3M-r9-WFj"/>
-                        <outlet property="temperature" destination="N4V-PS-Ilr" id="UkE-jn-1sZ"/>
-                        <outlet property="windspeed" destination="Sc8-N8-DQd" id="VbO-Zd-gBR"/>
+                        <outlet property="cityNameLabel" destination="5qO-65-0pJ" id="U6J-LP-95Z"/>
+                        <outlet property="cloudLabel" destination="4Kl-7u-i9e" id="cHh-8A-DRW"/>
+                        <outlet property="currentStatusLabel" destination="0ZK-Iz-Mcf" id="UCu-7s-J0V"/>
+                        <outlet property="humidityLabel" destination="5ht-c7-hTW" id="0UL-cz-pU9"/>
+                        <outlet property="infoTableView" destination="wd1-Fu-I5U" id="7DR-jC-KKs"/>
+                        <outlet property="pressureLabel" destination="uZb-uQ-Xwf" id="Pen-83-THB"/>
+                        <outlet property="sunriseLabel" destination="ftP-I9-KAS" id="fYp-CR-s9T"/>
+                        <outlet property="sunsetLabel" destination="D1W-B1-HnT" id="07B-Gd-ivg"/>
+                        <outlet property="temperatureLabel" destination="N4V-PS-Ilr" id="jjP-AN-gAX"/>
+                        <outlet property="windSpeedLabel" destination="Sc8-N8-DQd" id="GzN-Ri-xfi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

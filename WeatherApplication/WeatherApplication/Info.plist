@@ -26,9 +26,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Using user&apos;s current location for weather app</string>
+	<string>Using user's current location for weather app</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Using user&apos;s current location for weather app</string>
+	<string>Using user's current location for weather app</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -39,6 +39,7 @@ class RootViewController: UIViewController {
             if let error = error {
                 dump(error)
             } else if let response = response {
+                self.currentWeatherViewController.viewModel?.weather = response
                 // Nofity CurrentWeatherViewController
                 print("response \(response)")
             }
@@ -87,6 +88,7 @@ class RootViewController: UIViewController {
     
     private func requestLocation() {
         locationManager.delegate = self
+        locationManager.requestLocation()
     }
 
 }

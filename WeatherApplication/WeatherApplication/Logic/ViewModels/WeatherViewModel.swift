@@ -34,7 +34,7 @@ struct CurrentWeatherViewModel {
     }
     
     var temperature: String {
-        return String(format: "%.1f °F", 12)
+        return String(format: "%.1f °F", weather.main.temp)
     }
     
 }
