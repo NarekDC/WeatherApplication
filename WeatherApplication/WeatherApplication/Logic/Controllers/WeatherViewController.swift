@@ -12,7 +12,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var currentStatusLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
-    
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var cloudLabel: UILabel!
@@ -32,9 +31,10 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupTableView()
+        
         initVM()
+        setupTableView()
+        setupLabels()
     }
     
     private func setupNavigationBar(){
@@ -47,6 +47,10 @@ class WeatherViewController: UIViewController {
         infoTableView.register(WeeklyWeatherCell.self, forCellReuseIdentifier: "mCell")
     }
     
+    private func setupLabels() {
+        
+    }
+    
     private func initVM() {
 
         weeklyWeatherVM.reloadTableViewClosure = { [weak self] in
@@ -56,7 +60,6 @@ class WeatherViewController: UIViewController {
         }
         weeklyWeatherVM.initFetch()
     }
-
 }
 
 extension WeatherViewController {
@@ -79,7 +82,7 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
         }
         
         let cellVM = weeklyWeatherVM.getCellViewModel(at: indexPath)
-        cell.meteoriteListCellViewModel = cellVM
+        cell.weeklyWeatherListCellViewModel = cellVM
         
         return cell
     }

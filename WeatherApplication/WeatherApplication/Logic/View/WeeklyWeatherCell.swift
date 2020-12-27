@@ -10,11 +10,11 @@ import UIKit
 
 class WeeklyWeatherCell: UITableViewCell {
     
-    var meteoriteListCellViewModel : WeeklyWeatherListCellViewModel? {
+    var weeklyWeatherListCellViewModel : WeeklyWeatherListCellViewModel? {
         didSet {
-            nameLabel.text = meteoriteListCellViewModel?.titleText
-            sizeLabel.text = meteoriteListCellViewModel?.sizeText
-            dateLabel.text = meteoriteListCellViewModel?.dateText
+            nameLabel.text = weeklyWeatherListCellViewModel?.titleText
+            sizeLabel.text = weeklyWeatherListCellViewModel?.sizeText
+            dateLabel.text = weeklyWeatherListCellViewModel?.dateText
         }
     }
     private var nameLabel: UILabel = {

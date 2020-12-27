@@ -43,9 +43,8 @@ class DataRepository {
     }
     
     func getDbInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
-        
-//        let object = dbContainer?.values(WeatherInfo.self, matching: nil)
-//        completion(.success(object), nil)
+        let objects = dbContainer?.values(WeatherInfo.self, matching: nil)
+        completion(.success((objects?.first)!))
     }
 }
 

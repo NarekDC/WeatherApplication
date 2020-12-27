@@ -38,9 +38,16 @@ extension WeatherInfo: Persistable {
         current.sunrise = managedObject.current!.sunrise
         current.pressure = managedObject.current!.pressure
         current.temp = Double(managedObject.current!.temp)
-        daily = [Daily]()
+        
+        var mutatedDaily = [Daily]()
+        for element in managedObject.daily {
+            let temp = Temp(day: Double(element.temp!.day), night: Double(element.temp!.night))
+            let dailyElement = Daily(dt: element.dt, temp: temp)
+            mutatedDaily.append(dailyElement)
+        }
+        
+        daily = mutatedDaily
     }
-    
     
     public func managedObject() -> WeatherInfoObject {
         let weatherInfoObject = WeatherInfoObject()
@@ -52,6 +59,17 @@ extension WeatherInfo: Persistable {
         weatherInfoObject.current?.sunset = current.sunset
         weatherInfoObject.current?.sunrise = current.sunrise
         weatherInfoObject.current?.temp = Int(current.temp)
+                
+        for element in daily {
+            let dailyObject = DailyObject()
+            let temp = TempObject()
+            temp.day = Int(element.temp.day)
+            temp.night = Int(element.temp.night)
+            dailyObject.dt = element.dt
+            dailyObject.temp = temp
+            weatherInfoObject.daily.append(dailyObject)
+        }
+        
         return weatherInfoObject
     }
     
