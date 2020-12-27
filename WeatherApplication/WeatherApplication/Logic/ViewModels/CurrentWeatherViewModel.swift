@@ -7,34 +7,25 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-struct CurrentWeatherViewModel {
+
+struct CurrentWeatherViewModel {    
+    var weather: WeatherInfo!
     
-    var isLocationReady = false
-    var isWeatherReady = false
-    
-    var isUpdateReady: Bool {
-        return isLocationReady && isWeatherReady
+    public mutating func fetchWeather(currentLocation: CLLocation) {
+        let lat = currentLocation.coordinate.latitude
+        let lon = currentLocation.coordinate.longitude
+                
+        WeatherDataManager.shared.weatherDataAt(latitude: lat, longitude: lon, completion: {
+            response, error in
+            if let error = error {
+                dump(error)
+            } else if let response = response {
+//                self.currentWeatherViewController.viewModel?.weather = response
+                // Nofity CurrentWeatherViewController
+                print("response \(response)")
+            }
+        })
     }
-    
-    var location: Location! {
-        didSet {
-            self.isLocationReady = location != nil ? true : false
-        }
-    }
-    
-    var weather: WeatherInfo! {
-        didSet {
-            self.isWeatherReady = weather != nil ? true : false
-        }
-    }
-    
-    var city: String {
-        return location.name
-    }
-    
-    var temperature: String {
-        return String(format: "%.1f °F", 12)
-    }
-    
 }

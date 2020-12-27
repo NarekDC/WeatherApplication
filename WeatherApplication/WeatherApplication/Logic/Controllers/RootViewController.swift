@@ -27,32 +27,21 @@ class RootViewController: UIViewController {
     
     private var currentLocation: CLLocation? {
         didSet {
-            fetchWeather()
+            print("current location \(String(describing: currentLocation))")
+            updateWeatherData()
         }
     }
-    
-    private func fetchWeather() {
-        guard let currentLocation = currentLocation else { return }
-        
-        let lat = currentLocation.coordinate.latitude
-        let lon = currentLocation.coordinate.longitude
-        
-        WeatherDataManager.shared.weatherDataAt(latitude: lat, longitude: lon, completion: {
-            response, error in
-            if let error = error {
-                dump(error)
-            } else if let response = response {
-//                self.currentWeatherViewController.viewModel?.weather = response
-                // Nofity CurrentWeatherViewController
-                print("response \(response)")
-            }
-        })
-    }
-        
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupActiveNotification()
+    }
+    
+    private func updateWeatherData() {
+        guard let currentLocation = currentLocation else { return }
+
+        viewModel.fetchWeather(currentLocation: currentLocation)
     }
     
     private func setupActiveNotification() {
