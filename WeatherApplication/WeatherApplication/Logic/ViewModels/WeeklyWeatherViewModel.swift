@@ -11,6 +11,7 @@ import Foundation
 final class WeeklyWeatherViewModel {
     
     private var dataRepo: DataRepositoryProtocol
+    
     var weatherWeaklyInfoList = [Daily]()
     var cityName: String? {
         didSet {
@@ -40,6 +41,12 @@ final class WeeklyWeatherViewModel {
     
     init(dataRepo:DataRepositoryProtocol = DataRepository()) {
         self.dataRepo = dataRepo
+        
+        setupObserver()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func initFetch() {
@@ -63,6 +70,19 @@ final class WeeklyWeatherViewModel {
         self.weatherWeaklyInfoList = weatherInfo.daily
         self.currentInfo = weatherInfo.current
         self.cellViewModels = Array(self.weatherWeaklyInfoList.map { createCellViewModel(daily: $0) }.prefix(7))
+    }
+    
+    private func setupObserver() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(locationSaved), name: Notification.Name("locationSaved"), object: nil)
+    }
+    
+    @objc func locationSaved() {
+        
+        print("asdasd")
+        DispatchQueue.main.async {
+            self.initFetch()
+        }
     }
     
     func getCellViewModel( at indexPath: IndexPath ) -> WeeklyWeatherListCellViewModel {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,14 +13,14 @@
             <objects>
                 <viewController storyboardIdentifier="WeatherViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="WeatherViewController" customModule="WeatherApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8aX-uC-AJ9">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wpc-c3-LOz">
-                                <rect key="frame" x="64" y="40" width="348" height="96"/>
+                                <rect key="frame" x="10" y="84" width="384" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="CityName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="379" translatesAutoresizingMaskIntoConstraints="NO" id="5qO-65-0pJ" userLabel="cityName">
-                                        <rect key="frame" x="0.0" y="0.0" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qgB-en-wDn"/>
                                         </constraints>
@@ -29,7 +29,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="currentStatus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZK-Iz-Mcf" userLabel="currentStatus">
-                                        <rect key="frame" x="0.0" y="38" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="30" width="384" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="6f6-Ae-JcQ"/>
                                         </constraints>
@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4V-PS-Ilr" userLabel="temperature">
-                                        <rect key="frame" x="0.0" y="76" width="348" height="20"/>
+                                        <rect key="frame" x="0.0" y="60" width="384" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="T7G-nw-iVU"/>
                                         </constraints>
@@ -63,14 +63,14 @@
                                 </variation>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-Fu-I5U">
-                                <rect key="frame" x="452" y="20" width="404" height="355"/>
+                                <rect key="frame" x="10" y="194" width="394" height="438"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VLY-Nb-0DM">
-                                <rect key="frame" x="64" y="176" width="348" height="180"/>
+                                <rect key="frame" x="20" y="662" width="374" height="180"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftP-I9-KAS" userLabel="sunrise">
-                                        <rect key="frame" x="0.0" y="0.0" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="F2g-t2-qVD"/>
                                         </constraints>
@@ -79,7 +79,7 @@
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1W-B1-HnT" userLabel="sunset">
-                                        <rect key="frame" x="0.0" y="30" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="30" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="heY-hy-qwQ"/>
                                         </constraints>
@@ -88,7 +88,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kl-7u-i9e" userLabel="cloud">
-                                        <rect key="frame" x="0.0" y="60" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="6oa-rN-41y"/>
                                         </constraints>
@@ -97,7 +97,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sc8-N8-DQd" userLabel="windspeed">
-                                        <rect key="frame" x="0.0" y="90" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="90" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qER-jB-dzb"/>
                                         </constraints>
@@ -106,7 +106,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ht-c7-hTW" userLabel="humidity">
-                                        <rect key="frame" x="0.0" y="120" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="120" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="l9Z-PZ-Rmy"/>
                                         </constraints>
@@ -115,7 +115,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZb-uQ-Xwf" userLabel="pressure">
-                                        <rect key="frame" x="0.0" y="150" width="348" height="30"/>
+                                        <rect key="frame" x="0.0" y="150" width="374" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="chb-nG-QPN"/>
                                         </constraints>
@@ -188,6 +188,10 @@
                                 <exclude reference="3zw-ZI-vfO"/>
                                 <exclude reference="baZ-MG-7WA"/>
                                 <exclude reference="pTc-U0-MQb"/>
+                                <exclude reference="Ibp-bL-561"/>
+                                <exclude reference="Pdn-SG-weu"/>
+                                <exclude reference="Wd0-CA-A9k"/>
+                                <exclude reference="vHf-sm-nt1"/>
                                 <exclude reference="I2K-pL-g6l"/>
                                 <exclude reference="INQ-hb-Bs9"/>
                                 <exclude reference="K1v-a6-1HB"/>
@@ -197,10 +201,6 @@
                                 <exclude reference="rVT-RM-c7j"/>
                                 <exclude reference="yBs-0L-V09"/>
                                 <exclude reference="yjb-cD-nZo"/>
-                                <exclude reference="Ibp-bL-561"/>
-                                <exclude reference="Pdn-SG-weu"/>
-                                <exclude reference="Wd0-CA-A9k"/>
-                                <exclude reference="vHf-sm-nt1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -213,6 +213,11 @@
                                 <exclude reference="7m2-Wj-qOk"/>
                                 <include reference="baZ-MG-7WA"/>
                                 <include reference="pTc-U0-MQb"/>
+                                <exclude reference="Ibp-bL-561"/>
+                                <exclude reference="Pdn-SG-weu"/>
+                                <exclude reference="Wd0-CA-A9k"/>
+                                <exclude reference="fsG-8O-lrY"/>
+                                <include reference="vHf-sm-nt1"/>
                                 <exclude reference="98v-al-5h2"/>
                                 <include reference="I2K-pL-g6l"/>
                                 <exclude reference="INQ-hb-Bs9"/>
@@ -224,11 +229,6 @@
                                 <include reference="rVT-RM-c7j"/>
                                 <include reference="yBs-0L-V09"/>
                                 <exclude reference="yjb-cD-nZo"/>
-                                <exclude reference="Ibp-bL-561"/>
-                                <exclude reference="Pdn-SG-weu"/>
-                                <exclude reference="Wd0-CA-A9k"/>
-                                <exclude reference="fsG-8O-lrY"/>
-                                <include reference="vHf-sm-nt1"/>
                             </mask>
                         </variation>
                     </view>

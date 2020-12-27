@@ -22,11 +22,9 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var infoTableView: UITableView!
     
     var currentWeatherViewModel: CurrentWeatherViewModel?
-    var weeklyWeatherVM: WeeklyWeatherViewModel = WeeklyWeatherViewModel() {
-        didSet {
-            updateVM()
-        }
-    }
+    private lazy var weeklyWeatherVM: WeeklyWeatherViewModel = {
+        return WeeklyWeatherViewModel()
+    }()
     
     private let cellID = "mCell"
     
@@ -40,24 +38,13 @@ class WeatherViewController: UIViewController {
     private func setupNavigationBar(){
         self.navigationItem.title = "Weather App"
     }
-    
+
     private func setupTableView(){
         infoTableView.delegate = self
         infoTableView.dataSource = self
         infoTableView.register(WeeklyWeatherCell.self, forCellReuseIdentifier: "mCell")
     }
-    
-    fileprivate func fillUI() {
-        if !isViewLoaded {
-            return
-        }
-        
-        // we are sure here that we have all the setup done
-        
-        self.cityNameLabel.text = weeklyWeatherVM.cityName
-        self.currentStatusLabel.text = String(weeklyWeatherVM.currentInfo?.temp ?? 0)
-    }
-        
+
     private func updateVM() {
 
         weeklyWeatherVM.reloadTableViewClosure = { [weak self] in
@@ -65,7 +52,6 @@ class WeatherViewController: UIViewController {
                 self?.infoTableView.reloadData()
             }
         }
-        weeklyWeatherVM.initFetch()
         weeklyWeatherVM.updateName = { name in
             self.cityNameLabel.text = name
         }
@@ -82,7 +68,7 @@ class WeatherViewController: UIViewController {
             self.humidityLabel.text = "Humidity: \(currentInfo.humidity) %"
             self.pressureLabel.text = "Pressure: \(currentInfo.pressure) hPa"
         }
-        
+        weeklyWeatherVM.initFetch()
     }
 }
 

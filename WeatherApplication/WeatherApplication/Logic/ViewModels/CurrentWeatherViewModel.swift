@@ -28,6 +28,8 @@ struct CurrentWeatherViewModel {
             } else if let response = response {
                 DispatchQueue.main.async {
                     dataRepo.saveDataToDB(response)
+                    let nc = NotificationCenter.default
+                    nc.post(name: Notification.Name("locationSaved"), object: nil)
                 }
             }
         })
