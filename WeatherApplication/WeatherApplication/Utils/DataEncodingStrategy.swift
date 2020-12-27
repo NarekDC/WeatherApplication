@@ -24,7 +24,20 @@ extension Formatter {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
         return formatter
     }()
+    
+    static let weaklyFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        return formatter
+    }()
 }
+
+extension Date {
+    var weekOnly: String {
+        return Formatter.weaklyFormatter.string(from: self)
+    }
+}
+
 
 extension JSONDecoder.DateDecodingStrategy {
     static let customISO8601 = custom { decoder throws -> Date in

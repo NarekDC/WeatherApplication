@@ -24,7 +24,6 @@ final class WeeklyWeatherViewModel {
         return cellViewModels.count
     }
     
-    
     var reloadTableViewClosure: (()->())?
     
     init(dataRepo:DataRepositoryProtocol = DataRepository()) {
@@ -59,13 +58,12 @@ final class WeeklyWeatherViewModel {
     }
     
     func createCellViewModel(daily:Daily) -> WeeklyWeatherListCellViewModel {
-        let meteoriteMass = "UNKNOWN"
-        let meteoriteDate = "UNKNOWN"
-        let temp = "\(daily.temp)"
-        
-        return WeeklyWeatherListCellViewModel(titleText: temp,
-                                            sizeText: meteoriteMass,
-                                            dateText: meteoriteDate )
+        let date = Date(timeIntervalSince1970: TimeInterval(daily.dt))
+        let day = date.weekOnly
+
+        return WeeklyWeatherListCellViewModel(titleText: day,
+                                              sizeText: String(daily.temp.day),
+                                              dateText: String(daily.temp.night) )
     }
 }
 

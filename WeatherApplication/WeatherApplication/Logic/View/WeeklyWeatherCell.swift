@@ -20,22 +20,24 @@ class WeeklyWeatherCell: UITableViewCell {
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.textColor = .darkGray
         return label
     }()
     
     private var sizeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor = .lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .darkGray
         return label
     }()
     
     private var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .darkGray
         return label
     }()
     
@@ -56,7 +58,7 @@ class WeeklyWeatherCell: UITableViewCell {
     
    private func setNameLabelConstraints() {
         let nameLabelConstraints = [
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 20),
             nameLabel.heightAnchor.constraint(equalToConstant: 30)
         ]
@@ -65,8 +67,8 @@ class WeeklyWeatherCell: UITableViewCell {
     
    private func setSizeLabelConstraints() {
         let sizeLabelConstraints = [
-            sizeLabel.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 20),
-            sizeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            sizeLabel.rightAnchor.constraint(equalTo: self.rightAnchor,constant: -80),
+            sizeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             sizeLabel.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(sizeLabelConstraints)

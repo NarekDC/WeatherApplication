@@ -34,7 +34,6 @@ class WeatherViewController: UIViewController {
         
         initVM()
         setupTableView()
-        setupLabels()
     }
     
     private func setupNavigationBar(){
@@ -47,8 +46,9 @@ class WeatherViewController: UIViewController {
         infoTableView.register(WeeklyWeatherCell.self, forCellReuseIdentifier: "mCell")
     }
     
-    private func setupLabels() {
-        
+    private func showCurrentWeatherInformation() {
+        cityNameLabel.text = weeklyWeatherVM.cityName
+        currentStatusLabel.text = String(weeklyWeatherVM.currentInfo?.temp ?? 0)
     }
     
     private func initVM() {
@@ -83,12 +83,12 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
         
         let cellVM = weeklyWeatherVM.getCellViewModel(at: indexPath)
         cell.weeklyWeatherListCellViewModel = cellVM
-        
+        cell.backgroundColor = UIColor(rgb: 0xFFFFFF)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
