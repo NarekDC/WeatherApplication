@@ -12,8 +12,21 @@ final class WeeklyWeatherViewModel {
     
     private var dataRepo: DataRepositoryProtocol
     var weatherWeaklyInfoList = [Daily]()
-    var cityName: String = String()
-    var currentInfo: Current?
+    var cityName: String? {
+        didSet {
+            self.updateName?(cityName ?? "")
+        }
+    }
+    
+    var reloadTableViewClosure: (()->())?
+    var updateName: ((String) -> ())?
+    var updateUI: ((Current) -> ())?
+
+    var currentInfo: Current? {
+        didSet {
+            self.updateUI?(currentInfo ?? Current(sunrise: 0, sunset: 0, temp: 0, pressure: 0, humidity: 0, clouds: 0, windSpeed: 0))
+        }
+    }
     
     private var cellViewModels: [WeeklyWeatherListCellViewModel] = [WeeklyWeatherListCellViewModel]() {
         didSet {
@@ -24,7 +37,6 @@ final class WeeklyWeatherViewModel {
         return cellViewModels.count
     }
     
-    var reloadTableViewClosure: (()->())?
     
     init(dataRepo:DataRepositoryProtocol = DataRepository()) {
         self.dataRepo = dataRepo

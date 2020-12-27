@@ -22,17 +22,18 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var infoTableView: UITableView!
     
     var currentWeatherViewModel: CurrentWeatherViewModel?
-    
-    private lazy var weeklyWeatherVM: WeeklyWeatherViewModel = {
-        return WeeklyWeatherViewModel()
-    }()
+    var weeklyWeatherVM: WeeklyWeatherViewModel = WeeklyWeatherViewModel() {
+        didSet {
+            updateVM()
+        }
+    }
     
     private let cellID = "mCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initVM()
+        updateVM()
         setupTableView()
     }
     
@@ -57,7 +58,7 @@ class WeatherViewController: UIViewController {
         self.currentStatusLabel.text = String(weeklyWeatherVM.currentInfo?.temp ?? 0)
     }
         
-    private func initVM() {
+    private func updateVM() {
 
         weeklyWeatherVM.reloadTableViewClosure = { [weak self] in
             DispatchQueue.main.async {
@@ -65,6 +66,23 @@ class WeatherViewController: UIViewController {
             }
         }
         weeklyWeatherVM.initFetch()
+        weeklyWeatherVM.updateName = { name in
+            self.cityNameLabel.text = name
+        }
+        
+        weeklyWeatherVM.updateUI = { currentInfo in
+            let sunsetDate = Date(timeIntervalSince1970: TimeInterval(currentInfo.sunset))
+            let sunriseDate = Date(timeIntervalSince1970: TimeInterval(currentInfo.sunrise))
+            
+            self.cloudLabel.text = "Clouds: \(currentInfo.clouds) %"
+            self.temperatureLabel.text = "\(currentInfo.temp) °"
+            self.sunsetLabel.text = "Sunset: \(sunsetDate.amDate)"
+            self.sunriseLabel.text = "Sunrise: \(sunriseDate.amDate)"
+            self.windSpeedLabel.text = "Wind speed: \(currentInfo.windSpeed)"
+            self.humidityLabel.text = "Humidity: \(currentInfo.humidity) %"
+            self.pressureLabel.text = "Pressure: \(currentInfo.pressure) hPa"
+        }
+        
     }
 }
 

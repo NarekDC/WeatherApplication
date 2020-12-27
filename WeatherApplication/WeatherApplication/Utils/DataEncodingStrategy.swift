@@ -30,11 +30,24 @@ extension Formatter {
         formatter.dateFormat = "EEEE"
         return formatter
     }()
+    
+    static let amFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "h:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        return formatter
+    }()
 }
 
 extension Date {
     var weekOnly: String {
         return Formatter.weaklyFormatter.string(from: self)
+    }
+    
+    var amDate: String {
+        return Formatter.amFormatter.string(from: self)
     }
 }
 
