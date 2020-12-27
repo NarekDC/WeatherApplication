@@ -7,8 +7,7 @@
 
 import Foundation
 
-// http://api.openweathermap.org/data/2.5/weather?lat=51.509980&lon=-0.133700&appid=3687e5261eeb79b6aa8c42a493731e9a
-// forecast/daily?q={city name}&cnt={cnt}&appid={API key}
+// http://api.openweathermap.org/data/2.5/onecall?lat=51.509980&lon=-0.133700&appid=3687e5261eeb79b6aa8c42a493731e9a
 
 enum Key: String {
     case weatherApiKey = "3687e5261eeb79b6aa8c42a493731e9a"
@@ -38,45 +37,6 @@ extension Endpoint {
         return URLRequest(url: url,cachePolicy: .reloadIgnoringLocalCacheData)
     }
 }
-
-enum WeatherInfoEndpoint {
-    
-    case current
-}
-
-extension WeatherInfoEndpoint: Endpoint {
-    
-    var base: String {
-        return API.baseURL.absoluteString
-    }
-    
-    var path: String {  
-        switch self {
-        case .current: return "/onecall"
-        }
-    }
-}
-
-enum MeteoriteRecord {
-    
-    case listRecords
-}
-
-extension MeteoriteRecord: Endpoint {
-    
-    var base: String {
-        return API.baseURL.absoluteString
-    }
-    
-    var path: String {
-        switch self {
-        case .listRecords: return "/resource/y77d-th95.json"
-        }
-    }
-}
-
-
-
 
 struct Global{
     

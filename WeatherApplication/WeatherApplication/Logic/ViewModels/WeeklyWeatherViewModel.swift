@@ -8,43 +8,26 @@
 
 import Foundation
 
-enum UserAlert:  String, Error {
-    case userError = "Please make sure your network is working fine or re-launch the app"
-    case serverError = "Please wait a while and re-launch the app"
-}
-
 final class WeeklyWeatherViewModel {
+    
     private var dataRepo: DataRepositoryProtocol
     var meteoriteList = [Daily]()
+    
     private var cellViewModels: [MeteoriteListCellViewModel] = [MeteoriteListCellViewModel]() {
         didSet {
             self.reloadTableViewClosure?()
         }
     }
-    var isLoading: Bool = false {
-        didSet {
-            self.updateLoadingStatus?()
-        }
-    }
-    var alertMessage: String? {
-        didSet {
-            self.showAlertClosure?()
-        }
-    }
     var numberOfCells: Int {
         return cellViewModels.count
     }
-    var isSegueAllowed: Bool = false
     var reloadTableViewClosure: (()->())?
-    var showAlertClosure: (()->())?
-    var updateLoadingStatus: (()->())?
     
     init(dataRepo:DataRepositoryProtocol = DataRepository()) {
         self.dataRepo = dataRepo
     }
     
     func initFetch() {
-        self.isLoading = true
         
 //        dataRepo.initFetch{ [weak self] result in
 //            self?.isLoading = false
@@ -64,7 +47,7 @@ final class WeeklyWeatherViewModel {
     
     private func processMeteoriteToCellModel(weatherInfo: WeatherInfo) {
         
-//        self.meteoriteList = weatherInfo.daily
+        self.meteoriteList = weatherInfo.daily
         self.cellViewModels = self.meteoriteList.map { createCellViewModel(daily: $0) }
     }
     

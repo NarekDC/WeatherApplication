@@ -11,7 +11,11 @@ import CoreLocation
 
 
 struct CurrentWeatherViewModel {    
-    var weather: WeatherInfo!
+    private var dataRepo: DataRepositoryProtocol
+
+    init(dataRepo:DataRepositoryProtocol = DataRepository()) {
+        self.dataRepo = dataRepo
+    }
     
     public mutating func fetchWeather(currentLocation: CLLocation) {
         let lat = currentLocation.coordinate.latitude
@@ -24,7 +28,7 @@ struct CurrentWeatherViewModel {
             } else if let response = response {
 //                self.currentWeatherViewController.viewModel?.weather = response
                 // Nofity CurrentWeatherViewController
-                print("response \(response)")
+                print("daily \(response.daily)")
             }
         })
     }

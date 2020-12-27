@@ -48,22 +48,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func initVM() {
-        
-        weeklyWeatherVM.updateLoadingStatus = { [weak self] in
-            DispatchQueue.main.async {
-                let isLoading = self?.weeklyWeatherVM.isLoading ?? false
-                if isLoading {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self?.infoTableView.alpha = 0.0
-                    })
-                }else {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self?.infoTableView.alpha = 1.0
-                    })
-                }
-            }
-        }
-        
+
         weeklyWeatherVM.reloadTableViewClosure = { [weak self] in
             DispatchQueue.main.async {
                 self?.infoTableView.reloadData()
@@ -101,14 +86,6 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
-    }
-    
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if weeklyWeatherVM.isSegueAllowed {
-            return indexPath
-        }else {
-            return nil
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
