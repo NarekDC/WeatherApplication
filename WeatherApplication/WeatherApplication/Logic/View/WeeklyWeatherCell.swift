@@ -21,7 +21,7 @@ class WeeklyWeatherCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.textColor = .darkGray
+        label.textColor = .lightGray
         return label
     }()
     
@@ -29,7 +29,7 @@ class WeeklyWeatherCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .darkGray
+        label.textColor = .lightGray
         return label
     }()
     
@@ -37,7 +37,7 @@ class WeeklyWeatherCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .darkGray
+        label.textColor = .lightGray
         return label
     }()
     
@@ -58,8 +58,8 @@ class WeeklyWeatherCell: UITableViewCell {
     
    private func setNameLabelConstraints() {
         let nameLabelConstraints = [
-            nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 20),
+            nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10),
+            nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 40),
             nameLabel.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(nameLabelConstraints)
@@ -68,7 +68,7 @@ class WeeklyWeatherCell: UITableViewCell {
    private func setSizeLabelConstraints() {
         let sizeLabelConstraints = [
             sizeLabel.rightAnchor.constraint(equalTo: self.rightAnchor,constant: -80),
-            sizeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            sizeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10),
             sizeLabel.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(sizeLabelConstraints)
@@ -77,7 +77,7 @@ class WeeklyWeatherCell: UITableViewCell {
    private func setDataLabelConstraints() {
         let dataLabelConstraints = [
             dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor,constant: -20),
-            dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10),
             dateLabel.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(dataLabelConstraints)

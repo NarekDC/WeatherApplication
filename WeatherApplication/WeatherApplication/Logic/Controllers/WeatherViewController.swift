@@ -46,11 +46,17 @@ class WeatherViewController: UIViewController {
         infoTableView.register(WeeklyWeatherCell.self, forCellReuseIdentifier: "mCell")
     }
     
-    private func showCurrentWeatherInformation() {
-        cityNameLabel.text = weeklyWeatherVM.cityName
-        currentStatusLabel.text = String(weeklyWeatherVM.currentInfo?.temp ?? 0)
+    fileprivate func fillUI() {
+        if !isViewLoaded {
+            return
+        }
+        
+        // we are sure here that we have all the setup done
+        
+        self.cityNameLabel.text = weeklyWeatherVM.cityName
+        self.currentStatusLabel.text = String(weeklyWeatherVM.currentInfo?.temp ?? 0)
     }
-    
+        
     private func initVM() {
 
         weeklyWeatherVM.reloadTableViewClosure = { [weak self] in

@@ -50,7 +50,7 @@ final class WeeklyWeatherViewModel {
         self.cityName = weatherInfo.timezone
         self.weatherWeaklyInfoList = weatherInfo.daily
         self.currentInfo = weatherInfo.current
-        self.cellViewModels = self.weatherWeaklyInfoList.map { createCellViewModel(daily: $0) }
+        self.cellViewModels = Array(self.weatherWeaklyInfoList.map { createCellViewModel(daily: $0) }.prefix(7))
     }
     
     func getCellViewModel( at indexPath: IndexPath ) -> WeeklyWeatherListCellViewModel {
