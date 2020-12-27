@@ -143,7 +143,6 @@ struct Current: Codable {
     var pressure, humidity: Int
     var clouds: Int
     var windSpeed: Double
-//    var weather: [Weather]
     enum CodingKeys: String, CodingKey {
         case sunrise, sunset, pressure, humidity, clouds, temp
         case windSpeed = "wind_speed"

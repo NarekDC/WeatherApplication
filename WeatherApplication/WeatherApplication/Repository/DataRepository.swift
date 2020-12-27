@@ -43,8 +43,9 @@ class DataRepository {
     }
     
     func getDbInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
+        let mockWeatherData = WeatherInfo(timezone: "Yerevan", current: Current(sunrise: 0, sunset: 0, temp: 0, pressure: 0, humidity: 0, clouds: 0, windSpeed: 0), daily: [Daily(dt: 131121212, temp: Temp(day: 10, night: 10))])
         let objects = dbContainer?.values(WeatherInfo.self, matching: nil)
-        completion(.success((objects?.first)!))
+        completion(.success((objects?.first ?? mockWeatherData)))
     }
 }
 
