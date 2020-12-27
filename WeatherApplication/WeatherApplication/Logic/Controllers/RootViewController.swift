@@ -59,7 +59,12 @@ class RootViewController: UIViewController {
     
     private func requestLocation() {
         locationManager.delegate = self
-        locationManager.requestLocation()
+        
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
 
 }
