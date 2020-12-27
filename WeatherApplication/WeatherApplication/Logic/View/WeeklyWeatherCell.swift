@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class MeteoriteListCell: UITableViewCell {
+class WeeklyWeatherCell: UITableViewCell {
     
-    var meteoriteListCellViewModel : MeteoriteListCellViewModel? {
+    var meteoriteListCellViewModel : WeeklyWeatherListCellViewModel? {
         didSet {
             nameLabel.text = meteoriteListCellViewModel?.titleText
             sizeLabel.text = meteoriteListCellViewModel?.sizeText

@@ -9,7 +9,8 @@ import Foundation
 
 
 protocol DataRepositoryProtocol {
-
+    func getDBDataInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void)
+    func saveDataToDB(_ weatherInfo: WeatherInfo)
 }
 
 class DataRepository {
@@ -29,10 +30,11 @@ class DataRepository {
         }
     }
     
-    private func saveToDB(_ weatherInfo: WeatherInfo) {
+    func saveToDB(_ weatherInfo: WeatherInfo) {
         
         do {
             try dbContainer?.write { transaction in
+                print("weatherInfo in save \(weatherInfo)")
                 transaction.add(weatherInfo, update: .modified)
             }
         } catch (let error) {
@@ -40,7 +42,7 @@ class DataRepository {
         }
     }
     
-    private func getDbInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
+    func getDbInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
         
 //        let object = dbContainer?.values(WeatherInfo.self, matching: nil)
 //        completion(.success(object), nil)
@@ -49,31 +51,15 @@ class DataRepository {
 
 extension DataRepository:DataRepositoryProtocol {
     
-    func initWeatherDataFetch(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
-      
+    func saveDataToDB(_ weatherInfo: WeatherInfo) {
+        self.saveToDB(weatherInfo)
     }
     
-//    func initFetch(complete completion: @escaping (Result<[Meteorite], APIError>) -> Void) {
-//        
-//        
-//        
-//        apiClient.getListInfo(from: .listRecords) { [weak self] result in
-//            switch result{
-//                
-//            case .success(let meteorites):
-//                completion(.success(meteorites))
-//                DispatchQueue.main.async {
-//                    self?.saveToDB(meteorites)
-//                }
-//                
-//            case .failure(let error):
-//                completion(.failure(error))
-//                DispatchQueue.main.async {
-//                    self?.getDbInfo{ result in
-//                        completion(.success( try! result.get()))
-//                    }
-//                }
-//            }
-//        }
-//    }
+    func getDBDataInfo(complete completion: @escaping (Result<WeatherInfo, DataManagerError>) -> Void) {
+        DispatchQueue.main.async {
+            self.getDbInfo{ result in
+                completion(.success( try! result.get()))
+            }
+        }
+    }
 }

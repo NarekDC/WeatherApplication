@@ -13,7 +13,7 @@ final class WeeklyWeatherViewModel {
     private var dataRepo: DataRepositoryProtocol
     var meteoriteList = [Daily]()
     
-    private var cellViewModels: [MeteoriteListCellViewModel] = [MeteoriteListCellViewModel]() {
+    private var cellViewModels: [WeeklyWeatherListCellViewModel] = [WeeklyWeatherListCellViewModel]() {
         didSet {
             self.reloadTableViewClosure?()
         }
@@ -28,7 +28,6 @@ final class WeeklyWeatherViewModel {
     }
     
     func initFetch() {
-        
 //        dataRepo.initFetch{ [weak self] result in
 //            self?.isLoading = false
 //            
@@ -51,23 +50,23 @@ final class WeeklyWeatherViewModel {
         self.cellViewModels = self.meteoriteList.map { createCellViewModel(daily: $0) }
     }
     
-    func getCellViewModel( at indexPath: IndexPath ) -> MeteoriteListCellViewModel {
+    func getCellViewModel( at indexPath: IndexPath ) -> WeeklyWeatherListCellViewModel {
         return cellViewModels[indexPath.row]
     }
     
-    func createCellViewModel(daily:Daily) -> MeteoriteListCellViewModel {
+    func createCellViewModel(daily:Daily) -> WeeklyWeatherListCellViewModel {
         let meteoriteMass = "UNKNOWN"
         let meteoriteDate = "UNKNOWN"
         let temp = "\(daily.temp)"
         
-        return MeteoriteListCellViewModel(  titleText: temp,
+        return WeeklyWeatherListCellViewModel(  titleText: temp,
                                             sizeText: meteoriteMass,
                                             dateText: meteoriteDate )
     }
 }
 
 
-struct MeteoriteListCellViewModel {
+struct WeeklyWeatherListCellViewModel {
     let titleText: String
     let sizeText: String
     let dateText: String

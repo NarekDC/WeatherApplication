@@ -44,7 +44,7 @@ class WeatherViewController: UIViewController {
     private func setupTableView(){
         infoTableView.delegate = self
         infoTableView.dataSource = self
-        infoTableView.register(MeteoriteListCell.self, forCellReuseIdentifier: "mCell")
+        infoTableView.register(WeeklyWeatherCell.self, forCellReuseIdentifier: "mCell")
     }
     
     private func initVM() {
@@ -74,7 +74,7 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MeteoriteListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? WeeklyWeatherCell else {
             fatalError("Cell not in storyboard")
         }
         

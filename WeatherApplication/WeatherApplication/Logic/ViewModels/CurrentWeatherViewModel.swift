@@ -17,7 +17,7 @@ struct CurrentWeatherViewModel {
         self.dataRepo = dataRepo
     }
     
-    public mutating func fetchWeather(currentLocation: CLLocation) {
+    public func fetchWeather(currentLocation: CLLocation) {
         let lat = currentLocation.coordinate.latitude
         let lon = currentLocation.coordinate.longitude
                 
@@ -26,9 +26,9 @@ struct CurrentWeatherViewModel {
             if let error = error {
                 dump(error)
             } else if let response = response {
-//                self.currentWeatherViewController.viewModel?.weather = response
-                // Nofity CurrentWeatherViewController
-                print("daily \(response.daily)")
+                DispatchQueue.main.async {
+                    dataRepo.saveDataToDB(response)
+                }
             }
         })
     }
