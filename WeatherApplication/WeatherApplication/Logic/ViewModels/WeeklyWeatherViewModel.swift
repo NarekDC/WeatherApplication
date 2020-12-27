@@ -13,9 +13,9 @@ enum UserAlert:  String, Error {
     case serverError = "Please wait a while and re-launch the app"
 }
 
-final class MeteoriteViewModel {
+final class WeeklyWeatherViewModel {
     private var dataRepo: DataRepositoryProtocol
-    var meteoriteList = [Meteorite]()
+    var meteoriteList = [Daily]()
     private var cellViewModels: [MeteoriteListCellViewModel] = [MeteoriteListCellViewModel]() {
         didSet {
             self.reloadTableViewClosure?()
@@ -46,43 +46,38 @@ final class MeteoriteViewModel {
     func initFetch() {
         self.isLoading = true
         
-        dataRepo.initFetch{ [weak self] result in
-            self?.isLoading = false
-            
-            switch result{
-            case .success(let meteorites):
-                self?.processMeteoriteToCellModel(meteorites: meteorites)
-            case .failure(let error):
-                self?.processError(error: error)
-            }
-        }
+//        dataRepo.initFetch{ [weak self] result in
+//            self?.isLoading = false
+//            
+//            switch result{
+//            case .success(let meteorites):
+//                self?.processMeteoriteToCellModel(meteorites: meteorites)
+//            case .failure(let error):
+//                self?.processError(error: error)
+//            }
+//        }
     }
     
-    private func processError(error:APIError) {
-        switch error {
-        case .clientError:
-            self.alertMessage = UserAlert.userError.rawValue
-            
-        case .serverError,.noData,.dataDecodingError:
-            self.alertMessage = UserAlert.serverError.rawValue
-        }
+    private func processError(error:DataManagerError) {
+        Global.printToConsole(message: error.localizedDescription)
     }
     
-    private func processMeteoriteToCellModel(meteorites: [Meteorite]) {
+    private func processMeteoriteToCellModel(weatherInfo: WeatherInfo) {
         
-        self.meteoriteList = meteorites.sorted(by: { $0.mName > $1.mName })
-        self.cellViewModels = self.meteoriteList.map { createCellViewModel(meteorite: $0) }
+//        self.meteoriteList = weatherInfo.daily
+        self.cellViewModels = self.meteoriteList.map { createCellViewModel(daily: $0) }
     }
     
     func getCellViewModel( at indexPath: IndexPath ) -> MeteoriteListCellViewModel {
         return cellViewModels[indexPath.row]
     }
     
-    func createCellViewModel(meteorite:Meteorite) -> MeteoriteListCellViewModel {
+    func createCellViewModel(daily:Daily) -> MeteoriteListCellViewModel {
         let meteoriteMass = "UNKNOWN"
         let meteoriteDate = "UNKNOWN"
+        let temp = "\(daily.temp)"
         
-        return MeteoriteListCellViewModel(  titleText: meteorite.mName,
+        return MeteoriteListCellViewModel(  titleText: temp,
                                             sizeText: meteoriteMass,
                                             dateText: meteoriteDate )
     }

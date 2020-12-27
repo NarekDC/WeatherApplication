@@ -16,7 +16,7 @@ enum Key: String {
 
 struct API {
     static let key = Key.weatherApiKey.rawValue
-    static let baseURL = URL(string: "http://api.openweathermap.org/data/2.5/weather")!
+    static let baseURL = URL(string: "http://api.openweathermap.org/data/2.5/onecall")!
 }
 
 protocol Endpoint {
@@ -42,7 +42,6 @@ extension Endpoint {
 enum WeatherInfoEndpoint {
     
     case current
-    case forecast
 }
 
 extension WeatherInfoEndpoint: Endpoint {
@@ -51,10 +50,9 @@ extension WeatherInfoEndpoint: Endpoint {
         return API.baseURL.absoluteString
     }
     
-    var path: String {
+    var path: String {  
         switch self {
-        case .current: return "/weather"
-        case .forecast: return "/forecast/daily"
+        case .current: return "/onecall"
         }
     }
 }

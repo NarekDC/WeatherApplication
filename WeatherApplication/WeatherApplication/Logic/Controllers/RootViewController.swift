@@ -12,6 +12,10 @@ import CoreLocation
 class RootViewController: UIViewController {
     
     let currentWeatherViewController = WeatherViewController.instantiateFromStoryboard()
+    
+    private lazy var viewModel: CurrentWeatherViewModel = {
+        return CurrentWeatherViewModel()
+    }()
          
     private lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -23,7 +27,6 @@ class RootViewController: UIViewController {
     
     private var currentLocation: CLLocation? {
         didSet {
-            fetchCity()
             fetchWeather()
         }
     }
@@ -45,32 +48,11 @@ class RootViewController: UIViewController {
             }
         })
     }
-    
-    private func fetchCity() {
-        guard let currentLocation = currentLocation else { return }
         
-        CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: {
-            placemarks, error in
-            if let error = error {
-                dump(error)
-            }
-            else if let city = placemarks?.first?.locality {
-                // Notify CurrentWeatherViewController
-                let l = Location(
-                    name: city,
-                    latitude: currentLocation.coordinate.latitude,
-                    longitude: currentLocation.coordinate.longitude)
-//                self.currentWeatherViewController.viewModel?.location = l
-            }
-        })
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupActiveNotification()
-        
-//        currentWeatherViewController.viewModel = CurrentWeatherViewModel()
     }
     
     private func setupActiveNotification() {

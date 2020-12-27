@@ -24,8 +24,8 @@ class WeatherViewController: UIViewController {
     
     var currentWeatherViewModel: CurrentWeatherViewModel?
     
-    private lazy var meteoriteVM: MeteoriteViewModel = {
-        return MeteoriteViewModel()
+    private lazy var weeklyWeatherVM: WeeklyWeatherViewModel = {
+        return WeeklyWeatherViewModel()
     }()
     
     private let cellID = "mCell"
@@ -49,9 +49,9 @@ class WeatherViewController: UIViewController {
     
     private func initVM() {
         
-        meteoriteVM.updateLoadingStatus = { [weak self] in
+        weeklyWeatherVM.updateLoadingStatus = { [weak self] in
             DispatchQueue.main.async {
-                let isLoading = self?.meteoriteVM.isLoading ?? false
+                let isLoading = self?.weeklyWeatherVM.isLoading ?? false
                 if isLoading {
                     UIView.animate(withDuration: 0.2, animations: {
                         self?.infoTableView.alpha = 0.0
@@ -64,12 +64,12 @@ class WeatherViewController: UIViewController {
             }
         }
         
-        meteoriteVM.reloadTableViewClosure = { [weak self] in
+        weeklyWeatherVM.reloadTableViewClosure = { [weak self] in
             DispatchQueue.main.async {
                 self?.infoTableView.reloadData()
             }
         }
-        meteoriteVM.initFetch()
+        weeklyWeatherVM.initFetch()
     }
 
 }
@@ -85,7 +85,7 @@ extension WeatherViewController {
 extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meteoriteVM.numberOfCells
+        return weeklyWeatherVM.numberOfCells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,7 +93,7 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
             fatalError("Cell not in storyboard")
         }
         
-        let cellVM = meteoriteVM.getCellViewModel(at: indexPath)
+        let cellVM = weeklyWeatherVM.getCellViewModel(at: indexPath)
         cell.meteoriteListCellViewModel = cellVM
         
         return cell
@@ -104,7 +104,7 @@ extension WeatherViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if meteoriteVM.isSegueAllowed {
+        if weeklyWeatherVM.isSegueAllowed {
             return indexPath
         }else {
             return nil

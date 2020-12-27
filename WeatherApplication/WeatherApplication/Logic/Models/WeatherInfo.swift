@@ -6,117 +6,146 @@
 //
 
 import Foundation
+import RealmSwift
 
+
+extension WeatherInfo {
+  public enum Query: QueryType {
+    case publisherName(String)
+
+    public var predicate: NSPredicate? {
+      switch self {
+      case .publisherName(let value):
+        return NSPredicate(format: "publisher.timezone == %@", value)
+      }
+    }
+
+    public var sortDescriptors: [SortDescriptor] {
+      return [SortDescriptor(keyPath:"timezone")]
+    }
+  }
+}
+
+extension WeatherInfo: Persistable {
+        
+    public init(managedObject: WeatherInfoObject) {
+        timezone = managedObject.timezone
+        current = Current(sunrise: 0, sunset: 0, temp: 0, pressure: 0, humidity: 0, clouds: 0, windSpeed: 0)
+        current.clouds = managedObject.current!.clouds
+        current.windSpeed = Double(managedObject.current!.windSpeed)
+        current.humidity = managedObject.current!.humidity
+        current.sunset = managedObject.current!.sunset
+        current.sunrise = managedObject.current!.sunrise
+        current.pressure = managedObject.current!.pressure
+        current.temp = Double(managedObject.current!.temp)
+        daily = [Daily]()
+    }
+    
+    
+    public func managedObject() -> WeatherInfoObject {
+        let weatherInfoObject = WeatherInfoObject()
+        weatherInfoObject.timezone = timezone
+        weatherInfoObject.current?.clouds = current.clouds
+        weatherInfoObject.current?.humidity = current.humidity
+        weatherInfoObject.current?.pressure = current.pressure
+        weatherInfoObject.current?.windSpeed = Int(current.windSpeed)
+        weatherInfoObject.current?.sunset = current.sunset
+        weatherInfoObject.current?.sunrise = current.sunrise
+        weatherInfoObject.current?.temp = Int(current.temp)
+        return weatherInfoObject
+    }
+    
+}
+
+final class WeatherInfoObject:Object{
+    @objc dynamic var timezone = ""
+    @objc dynamic var current: CurrentObject? = CurrentObject()
+    
+    dynamic var daily = List<DailyObject>()
+
+    override static func primaryKey() -> String? {
+        return "timezone"
+    }
+}
+
+final class DailyObject: Object {
+    @objc dynamic var dt = 0
+    @objc dynamic var temp: TempObject? = TempObject()
+    
+    override static func primaryKey() -> String? {
+        return "dt"
+    }
+}
+
+final class CurrentObject: Object {
+    @objc dynamic var sunrise = 0
+    @objc dynamic var sunset = 0
+    @objc dynamic var pressure = 0
+    @objc dynamic var windSpeed = 0
+    @objc dynamic var clouds = 0
+    @objc dynamic var humidity = 0
+    @objc dynamic var temp = 0
+
+    dynamic var weather = List<WeatherObject>()
+
+    override static func primaryKey() -> String? {
+        return "sunrise"
+    }
+}
+
+final class TempObject: Object {
+    @objc dynamic var day = 0
+    @objc dynamic var night = 0
+    
+    override static func primaryKey() -> String? {
+        return "day"
+    }
+}
+
+final class WeatherObject: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var icon = ""
+    
+
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+// MARK: - WeatherInfo
 struct WeatherInfo: Codable {
-//    let sys: WeatherSys
-//    let weather: [WeatherPresentation]
-//    let main: Main
-//    let wind: WeatherWind
-//    let clouds: WeatherClouds
-//    let dt, id: Int
-    let name: String
+    var timezone: String
+    var current: Current
+    var daily: [Daily]
 }
 
-struct WeatherClouds: Codable {
-    let all: Int
-}
-
-struct Main: Codable {
-    let temp: Double
-    let humidity, pressure: Int
-    let tempMin, tempMax: Double
-    
+// MARK: - Current
+struct Current: Codable {
+    var sunrise, sunset: Int
+    var temp: Double
+    var pressure, humidity: Int
+    var clouds: Int
+    var windSpeed: Double
+//    var weather: [Weather]
     enum CodingKeys: String, CodingKey {
-        case temp, humidity, pressure
-        case tempMin = "temp_min"
-        case tempMax = "temp_max"
+        case sunrise, sunset, pressure, humidity, clouds, temp
+        case windSpeed = "wind_speed"
     }
+
 }
 
-struct WeatherSys: Codable {
-    let country: String
-    let sunrise, sunset: Int
+// MARK: - Weather
+struct Weather: Codable {
+    var id: Int
+    var icon: String
 }
 
-struct WeatherPresentation: Codable {
-    let id: Int
-    let main, description, icon: String
+// MARK: - Daily
+struct Daily: Codable {
+    var dt: Int
+    var temp: Temp
 }
 
-struct WeatherWind: Codable {
-    let speed, deg: Double
-}
-
-struct APIMeteorite:Decodable {
-      let name, id, nametype, recclass: String
-      let mass: String?
-      let fall: String
-      let year: String?
-      let reclat, reclong: String?
-      var geolocation: Geolocation?
-    
-    init(name:String,
-         id:String,
-         nametype:String,
-         recclass:String,
-         mass:String?,
-         fall:String,
-         year:String?,
-         reclat:String?,
-         reclong:String?,
-         geolocation:Geolocation) {
-        self.name = name
-        self.id = id
-        self.geolocation = geolocation
-        self.mass = mass
-        self.nametype = nametype
-        self.recclass = recclass
-        self.reclat = reclat
-        self.reclong = reclong
-        self.fall = fall
-        self.year = year
-    }
-}
-
-enum APINULL:String, Error {
-    case noSize = "-1"
-    case noYear = "NoYear"
-}
-
-extension APIMeteorite: Meteorite {
-    var mName: String { name }
-    var mFall:String { fall }
-    var mSize: Double {
-        if let nMass = Double(mass ?? APINULL.noSize.rawValue) {
-            return nMass
-        }else {
-            return Double(APINULL.noSize.rawValue)!
-        }
-    }
-    var mDate: String { year?.components(separatedBy: "T")[0] ?? APINULL.noYear.rawValue }
-    var mLocation: Geolocation { geolocation ?? Geolocation(type: "Point", coordinates: [360,360]) }
-}
-
-struct Geolocation: Codable {
-    var type: String
-    var coordinates: [Double]
-    var location: Coordinates{ Coordinates(latitude: coordinates[1],
-                                           longitude: coordinates[0])
-                              }
-    init(type:String,coordinates:[Double]) {
-        self.type = type
-        self.coordinates = coordinates
-    }
-}
-
-struct Coordinates {
-    var latitude:Double
-    var longitude:Double
-    var isEmpty:Bool{
-        return latitude == 360 && longitude == 360
-    }
-}
-
-protocol Meteorite {
-    var mName: String{ get }
+// MARK: - Temp
+struct Temp: Codable {
+    var day, night: Double
 }
